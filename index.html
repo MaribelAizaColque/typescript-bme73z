@@ -1,0 +1,163 @@
+<head>
+    <script src="https://www.x3dom.org/download/x3dom.js"></script> 
+    <link rel='stylesheet' type="text/css" href="https://www.x3dom.org/download/x3dom.css" >
+</head>
+
+<h1>
+  Animated Crosswalk Simulation (X3DOM)
+</h1>
+
+<p>
+  Simulates a crosswalk with a traffic light.
+  Pedestrians and cars wait for the light and cross to get to 
+  the other side.
+</p>
+<p>
+  This example shows how to use the <b>waitSignal</b> and 
+  <b>sendSignal</b> methods.
+</p>
+<p>
+  This sample uses the same Crosswalk <b>Simulation</b> class
+  as shown earlier, this time using an X3DOM-based animation.
+</p>
+
+<div class="parameters">
+  <p>
+    Pedestrian light cycle times (seconds):
+  </p>
+  <label>
+    <span class="light red"></span>Red:
+    <input id="red" type="range" min="0" max="120" >
+  </label>
+  <label>
+    <span class="light yellow"></span>Yellow:
+    <input id="yellow" type="range" min="0" max="120">
+  </label>
+  <label>
+      <span class="light green"></span>Green:
+      <input id="green" type="range" min="0" max="120">
+  </label>
+</div>
+
+<button id="start">
+  Run
+</button>
+
+<div class="ss-time-now">
+    Time: <b><span>0.00</span></b> hours
+</div>
+<x3d class='ss-anim anim-host'> 
+    <scene>
+
+        <!-- default viewpoint -->
+        <viewpoint
+            position='0 -320 320'
+            orientation='1 0 0 .8'
+            centerOfRotation='0 0 -20'>
+        </viewpoint>
+
+        <!-- ground -->
+        <transform scale='300 150 .1' translation='0 0 -0.5'>
+            <shape>
+                <appearance> 
+                    <material diffuseColor='0.1 0.3 0.1' transparency='0.2'></material>
+                </appearance>
+                <box></box>
+            </shape>
+        </transform>
+
+        <!-- street -->
+        <transform scale='250 50 .1'>
+            <shape>
+                <appearance> 
+                    <material diffuseColor='.95 .95 .95'></material>
+                </appearance>
+                <box></box>
+            </shape>
+        </transform>
+
+        <!-- crosswalk -->
+        <transform scale='50 50 .1' translation='0 0 .1'>
+            <shape>
+                <appearance> 
+                    <material diffuseColor='.6 .6 .6'></material>
+                </appearance>
+                <box></box>
+            </shape>
+        </transform>
+
+        <!-- light -->
+        <transform class='light'>
+            <transform translation='0 120 25' rotation='1 0 0 1.57'>
+                <shape> <!-- post -->
+                    <appearance> 
+                        <material diffuseColor='.5 .5 .0'></material>
+                    </appearance>
+                    <cylinder height='50' radius='3'></cylinder>
+                </shape>
+                <transform translation='0 -21 0'>
+                    <shape> <!-- bottom rim -->
+                        <appearance> 
+                            <material diffuseColor='.5 .5 .0'></material>
+                        </appearance>
+                        <cylinder height='5' radius='15'></cylinder>
+                    </shape>
+                </transform>
+                <transform translation='0 55 0'>
+                    <shape> <!-- box -->
+                        <appearance> 
+                            <material diffuseColor='.5 .5 .0'></material>
+                        </appearance>
+                        <box size='22 65 20'></box>
+                    </shape>
+                </transform>
+                <transform translation='0 75 5'>
+                    <shape>
+                        <appearance> 
+                            <material class='light red' diffuseColor='1 0 0'></material>
+                        </appearance>
+                        <sphere radius='10'></sphere>
+                    </shape>
+                </transform>
+                <transform translation='0 55 5'>
+                    <shape>
+                        <appearance> 
+                            <material class='light yellow' diffuseColor='1 1 0'></material>
+                        </appearance>
+                        <sphere radius='10'></sphere>
+                    </shape>
+                </transform>
+                <transform translation='0 35 5'>
+                    <shape>
+                        <appearance> 
+                            <material class='light green' diffuseColor='0 1 0'></material>
+                        </appearance>
+                        <sphere radius='10'></sphere>
+                    </shape>
+                </transform>
+            </transform>
+        </transform>
+
+        <!-- queues -->
+        <div id="queues"></div>
+    </scene>
+</x3d>
+
+<p>
+  Drag the mouse to rotate the viewpoint, or
+  click-drag to move it.<br/>
+  Press <b>R</b> to reset the viewpoint, 
+  or <b>A</b> to see all elements.
+</p>
+
+<div id="output">
+</div>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-C31HSJ305H"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'G-C31HSJ305H');
+</script>
